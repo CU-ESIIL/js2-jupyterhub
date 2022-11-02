@@ -34,17 +34,29 @@ jobs:
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
       
-      - name: Build and push latest
-        id: docker_build_latest
+      - name: Build and push Jupyter latest
+        id: docker_build_jupyter_latest
         uses: docker/build-push-action@v2.6.1
         with:
-          context: latest 
-          file: docker/dockerfile
+          context: jupyter 
+          file: docker/jupyter/dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: harbor.cyverse.org/js2/jupyter-datascience:latest
+          tags: harbor.cyverse.org/jupyter/minimal:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-          
+
+      - name: Build and push RStudio latest
+        id: docker_build_rstudio_latest
+        uses: docker/build-push-action@v2.6.1
+        with:
+          context: rstudio
+          file: docker/rstudio/dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: harbor.cyverse.org/rstudio/binder:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

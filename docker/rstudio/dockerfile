@@ -1,0 +1,9 @@
+FROM rocker/binder:latest
+
+USER root
+RUN apt update && apt install -y nodejs npm
+RUN python3 -m pip install jupyterhub && \
+    npm install -g configurable-http-proxy
+USER rstudio
+
+EXPOSE 8000
