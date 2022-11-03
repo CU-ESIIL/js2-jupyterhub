@@ -71,9 +71,9 @@ Select the **launch a multi-vm zero-to-jupyterhub** template
 
 ## Create a new Jupyter Hub
 
-### Set the Region to launch your Jupyter Hub 
+### Step 1: Set the Region to launch your Jupyter Hub 
 
-??? Info "Currently CACAO only supports Jetstream2"
+??? Info "Currently, CACAO only supports the Jetstream2 IU cloud"
 
     The only region available to you in Jetstream2 is the Indiana University (IU)
 
@@ -81,11 +81,21 @@ Select the **launch a multi-vm zero-to-jupyterhub** template
 
 [<img src="./assets/region.png" width="750"/>](./assets/region.png){target=_blank}
 
-### Set the Parameters
+### Step 2: Set the Parameters
+
+Give your deployment a name. This is the name that will show up on the command line, so keep it short and without spaces
 
 [<img src="./assets/parameters.png" width="750"/>](./assets/parameters.png){target=_blank}
 
-### Set up Authentication
+Under the advanced options, you can disable access to the master node. Do this if you anticipate a lot of activity across the Hub or by users which max the CPUs and might cause problems managing the cluster.
+
+[<img src="./assets/parameters_advanced.png" width="750"/>](./assets/parameters_advanced.png){target=_blank}
+
+??? Info "Custom Dommain Names"
+
+    You can set up a DNS redirect to your custom website URL. In order to do this, you must set up a permanent IP address which your DNS recognizes.
+
+### Step 3: Set up Authentication
 
 There are two types of user authentication
 
@@ -101,7 +111,7 @@ GitHub Authentication is a multi-step process
 
     TBA
 
-### Set up Users
+### Step 4: Set up Users
 
 The JupyterHub users can be created at this time.
 
@@ -115,7 +125,7 @@ The JupyterHub users can be created at this time.
 
 [<img src="./assets/users.png" width="750"/>](./assets/users.png){target=_blank}
 
-### Set up Shared Storage
+### Step 5: Set up Shared Storage
 
 You can add a Shared Storage volume to your cluster.
 
@@ -123,7 +133,7 @@ You can also choose whether to make this volume "read-only"
 
 [<img src="./assets/storage.png" width="750"/>](./assets/storage.png){target=_blank}
 
-### Select the appropriate Docker Image
+### Step 6: Select the appropriate Docker Image
 
 In this step you're actually selecting a Docker Image from a public registry
 
@@ -137,6 +147,34 @@ We recommend you use a featured Project Jupyter Docker Stack image, or one of ou
 
 [<img src="./assets/image.png" width="750"/>](./assets/image.png){target=_blank}
 
-### Review and deploy :material-rocket:
+### Step 7: Review and deploy :material-rocket:
+
+You can see all of your choices for the cluster at this time. Make sure they are to your liking then click **Submit**
 
 [<img src="./assets/review.png" width="750"/>](./assets/review.png){target=_blank}
+
+Hubs typically take 8-16 minutes to provision before they are fully "Active"
+
+### Log into JupyterHub for the first time as Admin
+
+Login to the master mode running the Hub by copying the IP address and pasting it in your browser.
+
+[<img src="./assets/jupyterhub_master.png" width="750"/>](./assets/jupyterhub_master.png){target=_blank}
+
+The Hub will ask for you to login. Enter the `username` and `password` you set up in [Step 3](#step-3-set-up-authentication) and [Step 4](#step-4-set-up-users).
+
+[<img src="./assets/jupyterhub_login.png" width="250"/>](./assets/jupyterhub_login.png){target=_blank}
+
+The cluster will start up a new instance for your account
+
+[<img src="./assets/jupyterhub_startup.png" width="750"/>](./assets/jupyterhub_startup.png){target=_blank}
+
+You will be taken directly to a JupyterLab instance on the cluster
+
+[<img src="./assets/jupyterlab.png" width="750"/>](./assets/jupyterlab.png){target=_blank}
+
+To access the Admin Panel, you can enter a different path in the URL: `http://<IPADDRESS>/hub/admin`
+
+[<img src="./assets/jupyterhub_admin.png" width="750"/>](./assets/jupyterhub_admin.png){target=_blank}
+
+As the admin, you can add other admins or user accounts. These will all use the same Dummy Password set up in [Step 3](#step-3-set-up-authentication), unless you chose the option for GitHub Authentication. For Github all new usernames must be validated GitHub accounts. Those users must sign in with their GitHub authentication.
