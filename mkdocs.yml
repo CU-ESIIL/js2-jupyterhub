@@ -3,7 +3,7 @@ repo_name: 'cu-esiil/js2-jupyterhub'
 repo_url: 'https://github.com/cu-esiil/js2-jupyterhub'
 
 site_name: 'Jetstream2 Documentation'
-site_description: 'Documentation for Launching Jetstream2 Virutal Machines and Clusters'
+site_description: 'Documentation for Launching Jetstream2 Virtual Machines and Clusters'
 site_author: 'ESIIL CI Team'
 site_url: 'https://cu-esiil.github.io/js2-jupyterhub'
 

@@ -89,9 +89,9 @@ Give your deployment a name. This is the name that will show up on the command l
 
 Under the advanced options, you can disable access to the master node. Do this if you anticipate a lot of activity across the Hub or by users which max the CPUs and might cause problems managing the cluster.
 
-[<img src="./assets/parameters_advanced.png" width="750"/>](./assets/parameters_advanced.png){target=_blank}
+[<img src="./assets/parameters_advanced.png" width="500"/>](./assets/parameters_advanced.png){target=_blank}
 
-??? Info "Custom Dommain Names"
+??? Info "Custom Domain Names"
 
     You can set up a DNS redirect to your custom website URL. In order to do this, you must set up a permanent IP address which your DNS recognizes.
 
@@ -109,7 +109,35 @@ GitHub Authentication is a multi-step process
 
 ??? Info "Setting up GitHub Authentication"
 
-    TBA
+    [Authorizing GitHub OAuth Apps](https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps){target=_blank}
+
+    [Creating an OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app){target=_blank}
+
+    **Step 1**: Click on User Account Settings
+
+    [<img src="./assets/userbar-account-settings.png" width="250"/>](./assets/userbar-account-settings.png){target=_blank}
+
+    **Step 2**: In the left sidebar at the very bottom, click **:material-code-tags: Developer settings**
+    
+    **Step 3**: In the left sidebar, click **OAuth Apps** and select **New OAuth App** 
+
+    [<img src="./assets/github_oauth.png" width="750"/>](./assets/github_oauth.png){target=_blank}
+
+    **Step 4**: Create and register your new application
+
+    [<img src="./assets/github_register.png" width="750"/>](./assets/github_register.png){target=_blank}
+
+    **Step 5**: Create a client secret
+
+    [<img src="./assets/github_clientid.png" width="750"/>](./assets/github_clientid.png){target=_blank}
+
+    **Step 6**: Copy both the Client ID and Client Secret to the Auth template
+
+    [<img src="./assets/auth_github.png" width="500"/>](./assets/auth_github.png){target=_blank}
+
+    **Step 7**: Set the **Authorization Callback URL** -- if you're using a custom DNS, type that here. If you're using a basic IP Address use it here.
+
+    [<img src="./assets/github_update.png" width="750"/>](./assets/github_update.png){target=_blank}
 
 ### Step 4: Set up Users
 
