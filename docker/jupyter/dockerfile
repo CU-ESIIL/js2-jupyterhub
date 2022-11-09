@@ -59,3 +59,17 @@ COPY jupyter_notebook_config.json /opt/conda/etc/jupyter/jupyter_notebook_config
 
 # Rebuild the Jupyter Lab with new tools
 RUN jupyter lab build
+
+# Build Earthlab conda environment
+COPY environment.yml /home/jovyan/ 
+RUN mamba env create -f /home/jovyan/environment.yml
+RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/jovyan/.bashrc && \
+    echo "conda deactivate" >> /home/jovyan/.bashrc && \
+    echo "conda activate Earthlab" >> /home/jovyan/.bashrc
+RUN . /opt/conda/etc/profile.d/conda.sh && conda activate Earthlab && python -m ipykernel install --user --name Earthlab     
+RUN source /home/jovyan/.bashrc
+
+# Build RStudio Geospatial
+USER rstudio
+COPY install_geospatial.sh /home/rstudio/
+RUN ./home/rstudio/install_geospatial.sh 
