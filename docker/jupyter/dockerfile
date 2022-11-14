@@ -4,7 +4,8 @@ USER root
 
 RUN apt-get install -y apt-transport-https && \
     apt-get clean && apt-get update && apt-get install -y software-properties-common && \
-    add-apt-repository multiverse  
+    add-apt-repository multiverse && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update --yes && \
     apt-get install --yes \
@@ -13,71 +14,24 @@ RUN apt-get update --yes && \
     unixodbc-dev \
     r-base \
     r-cran-rodbc && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    apt-get update --yes 
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install RStudio
 RUN apt-get update && apt-get install --yes gdebi-core && \
     wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2022.07.2-576-amd64.deb && \
     gdebi -n rstudio-server-2022.07.2-576-amd64.deb && \
-    rm rstudio-server-2022.07.2-576-amd64.deb
+    rm rstudio-server-2022.07.2-576-amd64.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install Shiny Server
 RUN wget https://download3.rstudio.org/ubuntu-18.04/x86_64/shiny-server-1.5.19.995-amd64.deb && \
     gdebi -n shiny-server-1.5.19.995-amd64.deb && \
-    rm shiny-server-1.5.19.995-amd64.deb
-
-# Update permissions for /opt/conda
-RUN chown -R jovyan:users /opt/conda/share/jupyter/lab/
-USER jovyan
-# reinstall R packages 
-RUN mamba install --quiet --yes \
-    'r-base' \
-    'r-caret' \
-    'r-crayon' \
-    'r-devtools' \
-    'r-e1071' \
-    'r-forecast' \
-    'r-hexbin' \
-    'r-htmltools' \
-    'r-htmlwidgets' \
-    'r-irkernel' \
-    'r-nycflights13' \
-    'r-randomforest' \
-    'r-rcurl' \
-    'r-rmarkdown' \
-    'r-rodbc' \
-    'r-rsqlite' \
-    'r-shiny' \
-    'r-tidyverse' \
-    'unixodbc' && \
-    mamba clean --all -f -y
-# Install Jupyter Lab Proxy extensions (cards in Launcher)
-RUN pip install git+https://github.com/jupyterhub/jupyter-rsession-proxy.git jupyter-server-proxy jupyter-shiny-proxy && \
-    jupyter labextension install @jupyterlab/server-proxy 
-
-# Install Mamba Gator package manager
-RUN rm -f ~/.jupyter/lab/workspaces/default* && \
-    mamba install -y -c conda-forge mamba_gator
-
-# Install and configure jupyter lab.
-COPY jupyter_notebook_config.json /opt/conda/etc/jupyter/jupyter_notebook_config.json
-
-# Rebuild the Jupyter Lab with new tools
-RUN jupyter lab build
-
-# Build Earthlab conda environment
-COPY environment.yml /home/jovyan/ 
-RUN mamba env create -f /home/jovyan/environment.yml
-RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/jovyan/.bashrc && \
-    echo "conda deactivate" >> /home/jovyan/.bashrc && \
-    echo "conda activate Earthlab" >> /home/jovyan/.bashrc
-RUN . /opt/conda/etc/profile.d/conda.sh && conda activate Earthlab && python -m ipykernel install --user --name Earthlab     
-RUN source /home/jovyan/.bashrc
+    rm shiny-server-1.5.19.995-amd64.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Build RStudio Geospatial
-USER root
-
-RUN apt install -y \
+RUN apt-get update && \
+    apt install -y \
     gdal-bin \
     lbzip2 \
     libfftw3-dev \
@@ -102,8 +56,75 @@ RUN apt install -y \
     protobuf-compiler \
     sqlite3 \
     tk-dev \
-    unixodbc-dev
+    unixodbc-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Update permissions for /opt/conda
+RUN mkdir /usr/local/bin/start-notebook.d && \
+    chown -R jovyan:users /opt/conda/share /usr/local/share /usr/local/bin/start-notebook.d && \
+    wget -c --output-document /etc/skel/HelloWorld.ipynb https://gist.githubusercontent.com/mGalarnyk/37d18ec9522e526aca2d41d68809f914/raw/7107c635d38b50f2c733088defbdf04231aaf195/HelloWorld.ipynb
+
+USER jovyan
+# reinstall R packages 
+RUN mamba install --quiet --yes \
+    'r-base' \
+    'r-caret' \
+    'r-crayon' \
+    'r-devtools' \
+    'r-e1071' \
+    'r-forecast' \
+    'r-hexbin' \
+    'r-htmltools' \
+    'r-htmlwidgets' \
+    'r-irkernel' \
+    'r-nycflights13' \
+    'r-randomforest' \
+    'r-rcurl' \
+    'r-rmarkdown' \
+    'r-rodbc' \
+    'r-rsqlite' \
+    'r-shiny' \
+    'r-tidyverse' \
+    'unixodbc' && \
+    mamba clean --all -f -y
+
+# Install Jupyter Lab Proxy extensions (cards in Launcher)
+RUN pip install git+https://github.com/jupyterhub/jupyter-rsession-proxy.git jupyter-server-proxy jupyter-shiny-proxy && \
+    jupyter labextension install @jupyterlab/server-proxy 
+
+# Install Mamba Gator package manager
+RUN rm -f ~/.jupyter/lab/workspaces/default* && \
+    mamba install -y -c conda-forge mamba_gator
+
+# Install and configure jupyter lab. 
+COPY jupyter_notebook_config.json /opt/conda/etc/jupyter/jupyter_notebook_config.json
+
+# Rebuild the Jupyter Lab with new tools
+RUN jupyter lab build
+
+# Build Earthlab conda environment
+RUN conda update -y conda && \
+    conda config --remove channels conda-forge && \
+    conda config --add channels conda-forge
+
+COPY environment.yml /home/jovyan/ 
+RUN mamba env create -f /home/jovyan/environment.yml
+RUN . /opt/conda/etc/profile.d/conda.sh && conda deactivate && conda activate Earthlab && python -m ipykernel install --name Earthlab
+RUN wget https://gist.githubusercontent.com/mGalarnyk/37d18ec9522e526aca2d41d68809f914/raw/7107c635d38b50f2c733088defbdf04231aaf195/HelloWorld.ipynb
+
+# RUN echo "#!/usr/bin/bash" >> /usr/local/bin/start-notebook.d/earthlab.sh && \
+#     echo "id >>/home/jovyan/earthlab-sh.log 2>&1" >>/usr/local/bin/start-notebook.d/earthlab.sh && \
+#     echo ". /opt/conda/etc/profile.d/conda.sh >>/home/jovyan/earthlab-sh.log 2>&1" >>/usr/local/bin/start-notebook.d/earthlab.sh && \
+#     echo "conda deactivate >>/home/jovyan/earthlab-sh.log 2>&1" >>/usr/local/bin/start-notebook.d/earthlab.sh && \
+#     echo "conda activate Earthlab >>/home/jovyan/earthlab-sh.log 2>&1" >>/usr/local/bin/start-notebook.d/earthlab.sh && \
+#     echo -e "python -m ipykernel install --user --name Earthlab >>/home/jovyan/earthlab-sh.log 2>&1\n" >>/usr/local/bin/start-notebook.d/earthlab.sh && \
+#     chmod a+x  /usr/local/bin/start-notebook.d/earthlab.sh
+
+# RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/jovyan/.bashrc && \
+#     echo "conda deactivate" >> /home/jovyan/.bashrc && \
+#     echo "conda activate Earthlab" >> /home/jovyan/.bashrc
+# RUN . /opt/conda/etc/profile.d/conda.sh && conda deactivate && conda activate Earthlab && python -m ipykernel install --user --name Earthlab    
+# RUN source /home/jovyan/.bashrc
 
 RUN R -e 'install.packages(c("RColorBrewer", "RandomFields", "RNetCDF", "classInt", "deldir", "gstat", "hdf5r", "lidR", "mapdata", "maptools", "mapview", "ncdf4", "proj4", "raster", "rgdal", "rgeos", "rlas", "sf", "sp", "spacetime", "spatstat", "spatialreg", "spdep", "stars", "terra", "tidync", "tmap", "geoR", "geosphere", "BiocManager"), dependencies=TRUE, repos="http://cran.us.r-project.org")'
 
@@ -112,3 +133,4 @@ RUN R -e "BiocManager::install('rhdf5')"
 # Install Ty stuff
 
 RUN R -e 'install.packages(c("tidyverse", "tidync", "cft", "sf", "ggplot2", "ggthemes", "ggpattern", "magick", "future", "tidytable", "janitor", "timeout", "ggfortify", "forecast", "reticulate", "osmdata"), dependencies=TRUE, repos="http://cran.us.r-project.org")'
+# CMD ["/usr/local/bin/start-notebook.d/earthlab.sh","jupyterhub-singleuser"]
