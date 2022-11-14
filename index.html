@@ -1,0 +1,599 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Launching Jetstream2 Virtual Machines and Clusters">
+      
+      
+        <meta name="author" content="ESIIL CI Team">
+      
+      
+        <link rel="canonical" href="https://cu-esiil.github.io/js2-jupyterhub/">
+      
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Jetstream2 Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.472b142f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.08040f6c.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRegular:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Regular"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started-with-cacao" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Jetstream2 Documentation" class="md-header__button md-logo" aria-label="Jetstream2 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 20a6 6 0 0 1-6-6c0-3.09 2.34-5.64 5.35-5.96A7.496 7.496 0 0 1 12 4a7.5 7.5 0 0 1 7.35 6A5.02 5.02 0 0 1 24 15a5 5 0 0 1-5 5H6m12.5-8H18a1 1 0 0 1-1-1v-1a2 2 0 0 0-2-2h-1.5v2H15v1a2 2 0 0 0 2 2 2 2 0 0 0-2 2v1h-1.5v2H15a2 2 0 0 0 2-2v-1a1 1 0 0 1 1-1h.5v-2m-13 0v2H6a1 1 0 0 1 1 1v1a2 2 0 0 0 2 2h1.5v-2H9v-1a2 2 0 0 0-2-2 2 2 0 0 0 2-2v-1h1.5V8H9a2 2 0 0 0-2 2v1a1 1 0 0 1-1 1h-.5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jetstream2 Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="esiil" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+          
+            <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cu-esiil/js2-jupyterhub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cu-esiil/js2-jupyterhub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Jetstream2 Documentation" class="md-nav__button md-logo" aria-label="Jetstream2 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 20a6 6 0 0 1-6-6c0-3.09 2.34-5.64 5.35-5.96A7.496 7.496 0 0 1 12 4a7.5 7.5 0 0 1 7.35 6A5.02 5.02 0 0 1 24 15a5 5 0 0 1-5 5H6m12.5-8H18a1 1 0 0 1-1-1v-1a2 2 0 0 0-2-2h-1.5v2H15v1a2 2 0 0 0 2 2 2 2 0 0 0-2 2v1h-1.5v2H15a2 2 0 0 0 2-2v-1a1 1 0 0 1 1-1h.5v-2m-13 0v2H6a1 1 0 0 1 1 1v1a2 2 0 0 0 2 2h1.5v-2H9v-1a2 2 0 0 0-2-2 2 2 0 0 0 2-2v-1h1.5V8H9a2 2 0 0 0-2 2v1a1 1 0 0 1-1 1h-.5Z"/></svg>
+
+    </a>
+    Jetstream2 Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cu-esiil/js2-jupyterhub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cu-esiil/js2-jupyterhub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-cacao" class="md-nav__link">
+    Getting Started with CACAO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-into-cacao" class="md-nav__link">
+    Logging into CACAO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-credentials" class="md-nav__link">
+    Creating Credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-deployment" class="md-nav__link">
+    Create a New Deployment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-jupyter-hub" class="md-nav__link">
+    Create a new Jupyter Hub
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a new Jupyter Hub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-the-region-to-launch-your-jupyter-hub" class="md-nav__link">
+    Step 1: Set the Region to launch your Jupyter Hub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-set-the-parameters" class="md-nav__link">
+    Step 2: Set the Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-set-up-authentication" class="md-nav__link">
+    Step 3: Set up Authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-set-up-users" class="md-nav__link">
+    Step 4: Set up Users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-set-up-shared-storage" class="md-nav__link">
+    Step 5: Set up Shared Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-select-the-appropriate-docker-image" class="md-nav__link">
+    Step 6: Select the appropriate Docker Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-review-and-deploy" class="md-nav__link">
+    Step 7: Review and deploy 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-into-jupyterhub-for-the-first-time-as-admin" class="md-nav__link">
+    Log into JupyterHub for the first time as Admin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/cu-esiil/js2-jupyterhub/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Home</h1>
+
+<p><a href="https://cacao.jetstream-cloud.org/" target="_blank"><img src="./assets/cacao-logo.png" width="250"/></a></p>
+<h2 id="getting-started-with-cacao">Getting Started with CACAO<a class="headerlink" href="#getting-started-with-cacao" title="Permanent link">&para;</a></h2>
+<p><a href="https://access-ci.org/" target="_blank">Create an ACCESS account</a></p>
+<p><a href="https://docs.jetstream-cloud.org/alloc/overview/" target="_blank">Requesting an allocation on Jetstream-2</a></p>
+<h2 id="logging-into-cacao">Logging into CACAO<a class="headerlink" href="#logging-into-cacao" title="Permanent link">&para;</a></h2>
+<p>Click here: <a href="https://cacao.jetstream-cloud.org/" target="_blank">https://cacao.jetstream-cloud.org/</a> URL</p>
+<p><a href="https://cacao.jetstream-cloud.org/" target="_blank"><img src="./assets/signin.png" width="250"/></a></p>
+<p>CACAO uses ACCESS-CI <a href="https://www.cilogon.org/">CILogon</a> with DuoAuth</p>
+<p><a href="assets/login.png" target="_blank"><img src="./assets/login.png" width="750"/></a></p>
+<p><a href="https://identity.access-ci.org/manage-mfa.html" target="_blank">Setting up DuoAuth Multi-Factor Identity</a></p>
+<p><a href="assets/duo.png" target="_blank"><img src="./assets/duo.png" width="250"/></a></p>
+<p>You should now see the CACAO homepage</p>
+<p><a href="assets/home.png" target="_blank"><img src="./assets/home.png" width="750"/></a></p>
+<h2 id="creating-credentials">Creating Credentials<a class="headerlink" href="#creating-credentials" title="Permanent link">&para;</a></h2>
+<p>Before you can use Jetstream2 you need to create credentials for your user profile.</p>
+<p><a href="assets/credentials.png" target="_blank"><img src="./assets/credentials.png" width="750"/></a></p>
+<p>Select the <strong>+ Add Credential</strong> button in the upper right of the panel</p>
+<p><a href="assets/new_credential.png" target="_blank"><img src="./assets/new_credential.png" width="250"/></a></p>
+<p>Select the <strong>Cloud Credential</strong> option and select <strong>Jetstream 2</strong></p>
+<p><a href="assets/select_cloud.png" target="_blank"><img src="./assets/select_cloud.png" width="750"/></a></p>
+<p>Select any of the Jetstream2 Cloud Projects that you have access to (it may be only one project if this is your first time)</p>
+<p><a href="assets/project.png" target="_blank"><img src="./assets/project.png" width="750"/></a></p>
+<p>You should now see a completed summary with success:</p>
+<p><a href="assets/summary.png" target="_blank"><img src="./assets/summary.png" width="750"/></a></p>
+<p>Optionally, you can also create a Public SSH Key for yourself.</p>
+<p><a href="assets/new_credential.png" target="_blank"><img src="./assets/new_credential.png" width="250"/></a></p>
+<p>SSH keys are a good way to secure your deployments</p>
+<p><a href="assets/sshkey.png" target="_blank"><img src="./assets/sshkey.png" width="500"/></a></p>
+<h2 id="create-a-new-deployment">Create a New Deployment<a class="headerlink" href="#create-a-new-deployment" title="Permanent link">&para;</a></h2>
+<p>CACAO uses the concept of Deployments for new projects</p>
+<p>Select the Deployments tab on the left side:</p>
+<p><a href="assets/deployments.png" target="_blank"><img src="./assets/deployments.png" width="750"/></a></p>
+<p>Click the <strong>+ Add Deployment</strong> button</p>
+<p>Select the <strong>launch a multi-vm zero-to-jupyterhub</strong> template</p>
+<p><a href="assets/deployment.png" target="_blank"><img src="./assets/deployment.png" width="750"/></a></p>
+<h2 id="create-a-new-jupyter-hub">Create a new Jupyter Hub<a class="headerlink" href="#create-a-new-jupyter-hub" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-set-the-region-to-launch-your-jupyter-hub">Step 1: Set the Region to launch your Jupyter Hub<a class="headerlink" href="#step-1-set-the-region-to-launch-your-jupyter-hub" title="Permanent link">&para;</a></h3>
+<details class="info">
+<summary>Currently, CACAO only supports the Jetstream2 IU cloud</summary>
+<p>The only region available to you in Jetstream2 is the Indiana University (IU)</p>
+<p>You may create Credentials in the future with different cloud providers (Commercial or OpenStack) </p>
+</details>
+<p><a href="assets/region.png" target="_blank"><img src="./assets/region.png" width="750"/></a></p>
+<h3 id="step-2-set-the-parameters">Step 2: Set the Parameters<a class="headerlink" href="#step-2-set-the-parameters" title="Permanent link">&para;</a></h3>
+<p>Give your deployment a name. This is the name that will show up on the command line, so keep it short and without spaces</p>
+<p><a href="assets/parameters.png" target="_blank"><img src="./assets/parameters.png" width="750"/></a></p>
+<p>Under the advanced options, you can disable access to the master node. Do this if you anticipate a lot of activity across the Hub or by users which max the CPUs and might cause problems managing the cluster.</p>
+<p><a href="assets/parameters_advanced.png" target="_blank"><img src="./assets/parameters_advanced.png" width="500"/></a></p>
+<details class="info">
+<summary>Custom Domain Names</summary>
+<p>You can set up a DNS redirect to your custom website URL. In order to do this, you must set up a permanent IP address which your DNS recognizes.</p>
+</details>
+<h3 id="step-3-set-up-authentication">Step 3: Set up Authentication<a class="headerlink" href="#step-3-set-up-authentication" title="Permanent link">&para;</a></h3>
+<p>There are two types of user authentication</p>
+<p>Dummy Authentication allows you to create new user names and dummy passwords</p>
+<p><a href="assets/auth_dummy.png" target="_blank"><img src="./assets/auth_dummy.png" width="750"/></a></p>
+<p>GitHub Authentication is a multi-step process</p>
+<p><a href="assets/auth_github.png" target="_blank"><img src="./assets/auth_github.png" width="750"/></a></p>
+<details class="info">
+<summary>Setting up GitHub Authentication</summary>
+<p><a href="https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps" target="_blank">Authorizing GitHub OAuth Apps</a></p>
+<p><a href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app" target="_blank">Creating an OAuth App</a></p>
+<p><strong>Step 1</strong>: Click on User Account Settings</p>
+<p><a href="assets/userbar-account-settings.png" target="_blank"><img src="./assets/userbar-account-settings.png" width="250"/></a></p>
+<p><strong>Step 2</strong>: In the left sidebar at the very bottom, click <strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.6 16.6 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4m-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4Z"/></svg></span> Developer settings</strong></p>
+<p><strong>Step 3</strong>: In the left sidebar, click <strong>OAuth Apps</strong> and select <strong>New OAuth App</strong> </p>
+<p><a href="assets/github_oauth.png" target="_blank"><img src="./assets/github_oauth.png" width="750"/></a></p>
+<p><strong>Step 4</strong>: Create and register your new application</p>
+<p><a href="assets/github_register.png" target="_blank"><img src="./assets/github_register.png" width="750"/></a></p>
+<p><strong>Step 5</strong>: Create a client secret</p>
+<p><a href="assets/github_clientid.png" target="_blank"><img src="./assets/github_clientid.png" width="750"/></a></p>
+<p><strong>Step 6</strong>: Copy both the Client ID and Client Secret to the Auth template</p>
+<p><a href="assets/auth_github.png" target="_blank"><img src="./assets/auth_github.png" width="500"/></a></p>
+<p><strong>Step 7</strong>: Set the <strong>Authorization Callback URL</strong> -- if you're using a custom DNS, type that here. If you're using a basic IP Address use it here.</p>
+<p><a href="assets/github_update.png" target="_blank"><img src="./assets/github_update.png" width="750"/></a></p>
+</details>
+<h3 id="step-4-set-up-users">Step 4: Set up Users<a class="headerlink" href="#step-4-set-up-users" title="Permanent link">&para;</a></h3>
+<p>The JupyterHub users can be created at this time.</p>
+<details class="tip">
+<summary>Important: you must have an administrative user account</summary>
+<p>Make sure to create at least one user with "admin" privileges at this time</p>
+<p>You can create more accounts later on, so if you're in a hurry you only need one admin before launching the Hub.</p>
+<p>More admins and users can be created in the Jupyter Hub Admin panel</p>
+</details>
+<p><a href="assets/users.png" target="_blank"><img src="./assets/users.png" width="750"/></a></p>
+<h3 id="step-5-set-up-shared-storage">Step 5: Set up Shared Storage<a class="headerlink" href="#step-5-set-up-shared-storage" title="Permanent link">&para;</a></h3>
+<p>You can add a Shared Storage volume to your cluster.</p>
+<p>You can also choose whether to make this volume "read-only" </p>
+<p><a href="assets/storage.png" target="_blank"><img src="./assets/storage.png" width="750"/></a></p>
+<h3 id="step-6-select-the-appropriate-docker-image">Step 6: Select the appropriate Docker Image<a class="headerlink" href="#step-6-select-the-appropriate-docker-image" title="Permanent link">&para;</a></h3>
+<p>In this step you're actually selecting a Docker Image from a public registry</p>
+<p>We recommend you use a featured Project Jupyter Docker Stack image, or one of ours:</p>
+<p><code>harbor.cyverse.org/rstudio/binder:latest</code></p>
+<p><code>harbor.cyverse.org/jupyter/minimal:latest</code></p>
+<p><code>harbor.cyverse.org/jupyter/datascience:latest</code></p>
+<p><a href="assets/image.png" target="_blank"><img src="./assets/image.png" width="750"/></a></p>
+<h3 id="step-7-review-and-deploy">Step 7: Review and deploy <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 22-3.86-1.55c.7-1.53 1.2-3.11 1.51-4.72L20 22M7.86 20.45 4 22l2.35-6.27c.31 1.61.81 3.19 1.51 4.72M12 2s5 2 5 10c0 3.1-.75 5.75-1.67 7.83A2 2 0 0 1 13.5 21h-3a2 2 0 0 1-1.83-1.17C7.76 17.75 7 15.1 7 12c0-8 5-10 5-10m0 10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Z"/></svg></span><a class="headerlink" href="#step-7-review-and-deploy" title="Permanent link">&para;</a></h3>
+<p>You can see all of your choices for the cluster at this time. Make sure they are to your liking then click <strong>Submit</strong></p>
+<p><a href="assets/review.png" target="_blank"><img src="./assets/review.png" width="750"/></a></p>
+<p>Hubs typically take 8-16 minutes to provision before they are fully "Active"</p>
+<h3 id="log-into-jupyterhub-for-the-first-time-as-admin">Log into JupyterHub for the first time as Admin<a class="headerlink" href="#log-into-jupyterhub-for-the-first-time-as-admin" title="Permanent link">&para;</a></h3>
+<p>Login to the master mode running the Hub by copying the IP address and pasting it in your browser.</p>
+<p><a href="assets/jupyterhub_master.png" target="_blank"><img src="./assets/jupyterhub_master.png" width="750"/></a></p>
+<p>The Hub will ask for you to login. Enter the <code>username</code> and <code>password</code> you set up in <a href="#step-3-set-up-authentication">Step 3</a> and <a href="#step-4-set-up-users">Step 4</a>.</p>
+<p><a href="assets/jupyterhub_login.png" target="_blank"><img src="./assets/jupyterhub_login.png" width="250"/></a></p>
+<p>The cluster will start up a new instance for your account</p>
+<p><a href="assets/jupyterhub_startup.png" target="_blank"><img src="./assets/jupyterhub_startup.png" width="750"/></a></p>
+<p>You will be taken directly to a JupyterLab instance on the cluster</p>
+<p><a href="assets/jupyterlab.png" target="_blank"><img src="./assets/jupyterlab.png" width="750"/></a></p>
+<p>To access the Admin Panel, you can enter a different path in the URL: <code>http://&lt;IPADDRESS&gt;/hub/admin</code></p>
+<p><a href="assets/jupyterhub_admin.png" target="_blank"><img src="./assets/jupyterhub_admin.png" width="750"/></a></p>
+<p>As the admin, you can add other admins or user accounts. These will all use the same Dummy Password set up in <a href="#step-3-set-up-authentication">Step 3</a>, unless you chose the option for GitHub Authentication. For Github all new usernames must be validated GitHub accounts. Those users must sign in with their GitHub authentication.</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      2022-11-14
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 ESIIL
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/cu-esiil/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.indexes", "toc.integrate", "toc.follow"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+        <script src="javascripts/intercom-learning.js"></script>
+      
+    
+  </body>
+</html>
